@@ -24,8 +24,7 @@ public:
             temp = temp -> next;
         }
         return dummy->next;
-    };;;;
-
+    }
 };
 
 
