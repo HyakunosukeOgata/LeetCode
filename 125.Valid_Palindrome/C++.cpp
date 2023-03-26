@@ -1,5 +1,5 @@
-Runtime 5 ms  Beats 68.65% 
-Memory 7.4 MB Beats 59.44%
+Runtime 6 ms  Beats 58.58% 
+Memory 7.2 MB Beats 93.87%
 
 class Solution {
 public:
@@ -13,13 +13,10 @@ public:
             while(head < tail && !isalnum(s[tail])){
                 tail--;
             }
-            if (head < tail ){
-                if (tolower(s[head]) != tolower(s[tail])){
-                    return false;
-                }
-                ++head;
-                --tail;
-            }
+            if (tolower(s[head]) != tolower(s[tail]))
+                return false;
+            head++;
+            tail--;
         }
         return true;
     }
