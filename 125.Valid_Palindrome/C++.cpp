@@ -1,6 +1,6 @@
 Runtime 6 ms  Beats 58.58% 
 Memory 7.2 MB Beats 93.87%
-
+ 
 class Solution {
 public:
     bool isPalindrome(string s) {
