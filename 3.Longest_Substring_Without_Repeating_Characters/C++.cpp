@@ -1,17 +1,22 @@
-Runtime 9 ms Beats 89.12% 
-Memory 18.5 MB Beats 42.65%
+Runtime 35 ms  Beats 32.13% 
+Memory 10.9 MB Beats 27.84%
 
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
-        int pointer_first;
-        int pointer_second;
-        for (pointer_first = 0, pointer_second = 1; pointer_second < nums.size(); pointer_second++){
-            if (nums[pointer_first] != nums[pointer_second]){
-                pointer_first += 1;
-                nums[pointer_first] = nums[pointer_second]; 
+    int lengthOfLongestSubstring(string s) {
+        unordered_set <char> set;
+        int left  = 0;
+        int right = 0;
+        int ans   = 0;
+        while(right < s.size()){
+            while(set.find(s[right]) != set.end()){
+                set.erase(s[left]);
+                left++;
             }
+            ans = max (ans, right - left + 1);
+            set.insert(s[right]);
+            right++;
         }
-        return pointer_first + 1;
+        return ans;
     }
 };
