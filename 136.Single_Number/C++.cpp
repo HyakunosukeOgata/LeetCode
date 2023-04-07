@@ -19,3 +19,16 @@ public:
         return 0;
     }
 };
+
+Runtime  15 ms Beats 90.60% 
+Memory 16.9 MB Beats 88.17%
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int ans = nums[0];
+        for (int i = 1; i < nums.size(); i++)
+            ans ^= nums[i];
+        return ans;
+    }
+};
