@@ -5,7 +5,7 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
         int tail = numbers.size()-1;
-        int head = 0;
+    ㄑ    int head = 0;
         vector <int> ans;
         while(head < tail){
             if (numbers[head] + numbers[tail] > target){
