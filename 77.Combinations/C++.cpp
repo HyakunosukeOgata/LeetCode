@@ -10,7 +10,6 @@ public:
         return result;
     }
 private:
-    
     void backtracking(int n, int k, int startIndex);
 };
 
