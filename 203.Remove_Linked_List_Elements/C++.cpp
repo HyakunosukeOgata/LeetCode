@@ -1,38 +1,22 @@
-Runtime 30 ms Beats 24.52% 
-Memory 15.2 MB Beats 23.43%
-
-time  complexity : O(n)
-space complexity : O(1)
-
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        while (head != NULL && head->val == val) {
-            ListNode* tmp = head;
-            head = head->next;
-            delete tmp;
+        ListNode* dummy = new ListNode(0); // 創建假頭節點
+        dummy->next = head;
+        
+        ListNode* curr = dummy; // 使用假頭節點進行遍歷
+        while (curr->next != nullptr) {
+            if (curr->next->val == val) {
+                ListNode* temp = curr->next;
+                curr->next = curr->next->next;
+                delete temp;
+            } else {
+                curr = curr->next;
+            }
         }
 
-        ListNode* cur = head;
-        while(cur != NULL && cur->next != NULL){
-            if (cur->next->val == val){
-                ListNode* tmp = cur->next;
-                cur -> next = cur -> next -> next;
-                delete tmp;
-            }
-            else
-                cur = cur -> next;
-        }
+        head = dummy->next; // 更新真正的頭節點
+        delete dummy; // 刪除假頭節點
         return head;
     }
 };
