@@ -1,6 +1,3 @@
-Runtime 9 ms  Beats 71.39% 
-Memory 7.2 MB Beats 97.75%
-
 class Solution {
 public:
     bool isAnagram(string s, string t) {
@@ -18,5 +15,25 @@ public:
         }
         return true;
         
+    }
+};
+
+//-----------------------------------------------------------------------
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        vector<int> table_s(26, 0); 
+        vector<int> table_t(26, 0); 
+
+        for (int index = 0; index < s.length(); index++) {
+            table_s[s[index] - 'a']++;
+            table_t[t[index] - 'a']++;
+        }
+
+        return table_s == table_t;
     }
 };
