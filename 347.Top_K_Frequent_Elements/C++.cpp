@@ -1,30 +1,37 @@
-Runtime 11 ms Beats 96.9% 
-Memory 13.8 MB Beats 51.93%
-
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        unordered_map <int, int> map;
-        int len_size_nums = nums.size();
-        for (int index = 0; index < len_size_nums; index++){
-            map[nums[index]] ++;
+        // 第一步：使用 unordered_map 計算每個元素的頻率
+        unordered_map<int, int> frequencyMap;
+        for (int num : nums) {
+            frequencyMap[num]++;
         }
-        
-        vector <int> res;
-        priority_queue <pair <int, int>> pq;
-        for(auto i = map.begin(); i != map.end(); i++){
-            pq.push(make_pair(i->second, i->first));
-            if (pq.size() > (int) map.size() - k){
-                res.push_back(pq.top().second);
-                pq.pop();
+
+        // 第二步：構建最小堆來存儲頻率和元素的對
+        // 使用優先隊列（最小堆）來存儲（頻率，元素）對
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
+
+        // 第三步：遍歷頻率 map，將元素和頻率添加到最小堆中
+        for (auto& it : frequencyMap) {
+            minHeap.push({it.second, it.first});
+            // 如果堆的大小超過 k，則移除堆頂元素（頻率最小的元素）
+            if (minHeap.size() > k) {
+                minHeap.pop();
             }
         }
-        return res;
+
+        // 第四步：提取堆中的元素，這些是頻率最高的 k 個元素
+        vector<int> topKElements;
+        while (!minHeap.empty()) {
+            topKElements.push_back(minHeap.top().second);
+            minHeap.pop();
+        }
+
+        return topKElements;
     }
 };
 
-Runtime 10 ms Beats 80.65% 
-Memory  14 MB Beats 89.51%
+//------------------------------------------------------------------------------------
 
 class Solution {
 public:
