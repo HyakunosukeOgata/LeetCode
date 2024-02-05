@@ -1,6 +1,3 @@
-Runtime 21 ms  Beats 48.13% 
-Memory 20.4 MB Beats 34.30%
-
 class Solution {
 public:
     bool canPlaceFlowers(vector<int>& flowerbed, int n) {
@@ -22,5 +19,30 @@ public:
             }
         }
         return n <= 0 ? true: false;
+    }
+};
+
+
+class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+        int len = flowerbed.size();
+
+        for (int i = 0; i < len && n > 0; ++i) {
+            // Check if the current, previous, and next spots are empty (or at boundaries).
+            if (flowerbed[i] == 0) {
+                bool emptyLeft = (i == 0) || (flowerbed[i - 1] == 0);
+                bool emptyRight = (i == len - 1) || (flowerbed[i + 1] == 0);
+                
+                // If both adjacent spots are empty, plant a flower here.
+                if (emptyLeft && emptyRight) {
+                    flowerbed[i] = 1; // Planting a flower.
+                    n--; // Decreasing the number of flowers needed.
+                }
+            }
+        }
+
+        // If we were able to plant all required flowers, return true.
+        return n <= 0;
     }
 };
