@@ -13,3 +13,22 @@ public:
         return max(peak, valley);
     }
 };
+
+//============================================================================
+
+class Solution {
+public:
+    int wiggleMaxLength(vector<int>& nums) {
+        if (nums.size() < 2) return nums.size();
+        int maxLength = 1;
+        int prevDiff  = 0;
+        for (int index = 1; index < nums.size(); index++){
+            int currDiff = nums[index] - nums[index-1];
+            if ((currDiff > 0 && prevDiff <= 0) || (currDiff < 0 && prevDiff >= 0)){
+                maxLength++;
+                prevDiff = currDiff;
+            }
+        }
+        return maxLength;
+    }
+};

@@ -1,6 +1,3 @@
-Runtime 0 ms  Beats 100% 
-Memory 7.3 MB Beats 96.61% 
-
 class Solution {
 public:
     void reverse(string& s, int start, int end){ 
@@ -35,4 +32,71 @@ public:
         return s;
     }
 
+};
+
+//  ----------------------------------------------------------------
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        int initial_start = s.length()-1;
+        for (int i = s.length()-1; i >= 0; i--){
+            if (s[i] != ' '){
+                initial_start = i;
+                break;
+            }
+        }
+
+        std::string ans = "";
+
+        int count = 0;
+        for (int i = initial_start; i >= 0; i--){
+            if (s[i] == ' '){
+                ans += s.substr(i+1, count) + ' ';
+                count = 0;
+                while (i > 0 && s[i-1] == ' ') i--; 
+            }
+            else{
+                count++;
+            }
+        }
+        if (count > 0) {
+            ans += s.substr(0, count);
+        }
+        if (!ans.empty() && ans.back() == ' ') {
+            ans.pop_back();
+        }
+        return ans;
+    }
+};
+
+//  ----------------------------------------------------------------
+
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        vector<int> ans;
+        deque<int> dq;
+
+        for(int i = 0; i < k; ++i) {
+            while(!dq.empty() && nums[dq.back()] < nums[i]) {
+                dq.pop_back();
+            }
+            dq.push_back(i);
+        }
+        ans.push_back(nums[dq.front()]);
+
+        for(int i = k; i < nums.size(); ++i) {
+            while(!dq.empty() && dq.front() <= i - k) {
+                dq.pop_front();
+            }
+            while(!dq.empty() && nums[dq.back()] < nums[i]) {
+                dq.pop_back();
+            }
+            dq.push_back(i);
+            ans.push_back(nums[dq.front()]);
+        }
+
+        return ans;
+    }
 };
