@@ -32,3 +32,25 @@ public:
         return maxLength;
     }
 };
+
+-------------------------------------------------------------------------------------
+
+class Solution {
+public:
+    int wiggleMaxLength(vector<int>& nums) {
+        if (nums.size() < 2) return nums.size();
+        int flag = 0;
+        int ans =  1;
+        for (int  index = 1; index  < nums.size(); index++){
+            if  (nums[index] - nums[index-1] < 0 && flag != -1){
+                ans++;
+                flag = -1;
+            }
+            else if (nums[index] - nums[index-1] > 0 && flag != 1){
+                ans++;
+                flag = 1;
+            }
+        }
+        return ans;
+    }
+};
