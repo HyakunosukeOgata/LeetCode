@@ -100,3 +100,40 @@ public:
         return ans;
     }
 };
+
+//  ----------------------------------------------------------------
+
+class Solution {
+    public:
+        string reverseWords(string s) {
+            RemoveExtraSpace(s);
+            int start = 0;
+            reverse(s.begin(), s.end());
+            for (int i = 0; i <= s.length(); i++){
+                if (s[i] == ' ' || i == s.length()){
+                    reverse(s.begin() + start, s.begin() + i);
+                    start = i + 1;
+                }
+            }
+            return s;
+        }
+        void RemoveExtraSpace(string &s){
+            int i = 0;
+            while(s[i] == ' '){
+                s.erase(i, 1);
+    
+            }
+            for (int i = 1; i < s.length(); ){
+                if (s[i] == ' ' && s[i-1] == ' '){
+                    s.erase(i-1, 1);
+                }else{
+                    i++;
+                }
+            }
+            i = s.length() - 1;
+            while(s[i] == ' '){
+                i = s.length() - 1;
+                s.erase(i, 1);
+            }
+        }
+    };
