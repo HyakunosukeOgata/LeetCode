@@ -1,21 +1,17 @@
-Runtime 3 ms Beats 92.37% 
-Memory 9.3 MB Beats 27.95%
-
 class Solution {
-public:
-    string longestCommonPrefix(vector<string>& strs) {
-        int len_strs = strs.size();
-        string ans = "";
-        sort(strs.begin(), strs.end());
-        string first = strs[0];
-        string final = strs[len_strs - 1];
-        for (int i = 0; i < first.size(); i++){
-            if (first[i] == final[i]){
-                ans += first[i];
+    public:
+        string longestCommonPrefix(vector<string>& strs) {
+            if (strs.empty()) return "";
+            string prefix = strs[0];
+            for (int i = 1; i < strs.size(); i++){
+                while(strs[i].find(prefix) != 0){
+                    prefix = prefix.substr(0, prefix.size()-1);
+                    if (prefix.empty()){
+                        return "";
+                    }
+                }
             }
-            else
-                break;
+            return prefix;
         }
-        return ans;
-    }
-}; 
+    };
+    
