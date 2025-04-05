@@ -1,20 +1,22 @@
-Runtime 0 ms Beats 100% 
-Memory 6.6 MB Beats 57.7%
-
 class Solution {
-public:
-    int lengthOfLastWord(string s) {
-        int temp = 0;
-        reverse(s.begin(),s.end());
-        for(int i =  0; i < s.size(); i++){
-            if(s[i]!=' '){
-                temp++;
-            }
-            else{
-                if(temp != 0)
+    public:
+        int lengthOfLastWord(string s) {
+            int flag = 0;
+            int ans = 0;
+    
+            for (int i = s.length() - 1; i >= 0; i--) {
+                if (!flag && s[i] != ' ') {
+                    flag = 1;
+                }
+                if (flag && s[i] != ' ') { 
+                    ans++;
+                }
+                if (flag && s[i] == ' ') { 
                     break;
+                }
             }
+    
+            return ans;
         }
-        return temp;
-    }
-};
+    };
+    
