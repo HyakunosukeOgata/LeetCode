@@ -18,7 +18,7 @@ class Solution {
             if (!root){
                 return true;
             }
-            if (root -> val > maxVal || root -> val < minVal){
+            if (root -> val >= maxVal || root -> val <= minVal){
                 return false;
             }
             return helper(root->left, minVal, root->val) &&
